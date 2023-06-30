@@ -1,0 +1,41 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "@iconify/react": "^4.1.1",
+        "@mui/x-date-pickers": "^6.0.4",
+        "autoprefixer": "^10.4.14",
+        "axios": "^1.1.2",
+        "daisyui": "^2.51.5",
+        "dayjs": "^1.11.8",
+        "laravel-vite-plugin": "^0.7.5",
+        "postcss": "^8.4.24",
+        "tailwindcss": "^3.3.2",
+        "vite": "^4.0.0"
+    },
+    "dependencies": {
+        "@reduxjs/toolkit": "^1.9.5",
+        "@types/react": "^18.0.28",
+        "@types/react-dom": "^18.0.11",
+        "@vitejs/plugin-react": "^3.1.0",
+        "apexcharts": "^3.39.0",
+        "framer-motion": "^7.10.2",
+        "js-cookie": "^3.0.5",
+        "lodash-es": "^4.17.21",
+        "notistack": "^3.0.1",
+        "react": "^18.2.0",
+        "react-apexcharts": "^1.4.0",
+        "react-click-away-listener": "^2.2.3",
+        "react-dom": "^18.2.0",
+        "react-redux": "^8.0.5",
+        "react-router-dom": "^6.14.0",
+        "react-scroll": "^1.8.9",
+        "react-use-scroll-direction": "^0.1.0",
+        "simplebar-react": "^3.2.4",
+        "vite": "^4.2.0"
+    }
+}
