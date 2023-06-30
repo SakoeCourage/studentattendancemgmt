@@ -4,8 +4,8 @@ import React, { useRef, useState, useCallback, useEffect } from 'react'
 import Button from '../inputs/Button'
 import dayjs from 'dayjs';
 import Loadingwheel from '../Loaders/Loadingwheel';
-
-
+import Api from '@/js/api/Api';
+import { useAuth } from '@/js/auth/Authcontext';
 
 const getTime = () => {
   const now = dayjs()
@@ -24,7 +24,7 @@ const getTime = () => {
 export function LoginFormInput(props) {
   const [type, ChangeType] = useState(props?.type ?? '')
   const [showPassword, setShowPassword] = useState(false)
-  const [error,setError] = useState(null)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     showPassword ? ChangeType('text') : ChangeType(props?.type)
@@ -38,7 +38,7 @@ export function LoginFormInput(props) {
     <input value={props?.value} onChange={(e) => { setError(null); props.onChange(e) }} placeholder={props.placeholder ?? ''} type={type} className="border placeholder-gray-400 focus:outline-none
     focus:border-black w-full pt-4 pr-8 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-inherit
     border-gray-300 rounded-md"/>
-    {props.type == 'password' && <button onClick={(e) =>{e.preventDefault(); setShowPassword(!showPassword)}} className='   absolute right-5 top-3'>
+    {props.type == 'password' && <button onClick={(e) => { e.preventDefault(); setShowPassword(!showPassword) }} className='   absolute right-5 top-3'>
       <IconButton>
         {showPassword ? <Tooltip title="Hide Password"><Icon className='text-gray-400' fontSize={20} icon="mdi:eye-off-outline" /></Tooltip> :
           <Tooltip title="Reveal Password">
@@ -49,7 +49,7 @@ export function LoginFormInput(props) {
     </button>}
     <Collapse in={error && true} orientation='vertical'>
       <div className='flex items-center gap-1 text-red-500 text-sm'>
-        <Icon className=' min-w-[1.5rem] min-h-[1.5rem] max-w-[1.5rem] max-h-[1.5rem]' icon="solar:danger-triangle-bold" fontSize={20}  />
+        <Icon className=' min-w-[1.5rem] min-h-[1.5rem] max-w-[1.5rem] max-h-[1.5rem]' icon="solar:danger-triangle-bold" fontSize={20} />
         {error}
       </div>
     </Collapse>
@@ -63,12 +63,23 @@ const LoginForm = () => {
     password: null
   })
 
+  const { login } = useAuth()
+
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
 
 
   const handleLogin = (e) => {
-
+    setIsLoading(true)
+    e.preventDefault()
+    setIsLoading(true)
+    login(formValues).then(res => {
+      setIsLoading(false)
+    })
+      .catch(err => {
+        setErrors(err)
+        setIsLoading(false)
+      })
   }
 
 
@@ -87,7 +98,6 @@ const LoginForm = () => {
           <LoginFormInput error={errors?.email} label="Email" onChange={(e) => setFormValues({ ...formValues, email: e.target.value })} placeholder="example@example.com" type="text" />
           <LoginFormInput error={errors?.password} label="Password" onChange={(e) => setFormValues({ ...formValues, password: e.target.value })} placeholder="Password" type="password" />
 
-          <nav className=' text-sm flex items-center gap-3'>Forgot password? <span className=''>Contact Admin</span></nav>
           <div className="relative w-full">
             <Button className="w-full" info type="submit" disabled={isLoading}>
               <div className='flex items-center gap-2 '>

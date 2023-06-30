@@ -33,7 +33,7 @@ export function Adminlayout() {
           <Sidebar />
         </span>
         <span className=' grow h-full overflow-x-hidden flex flex-col' id='documentPage'>
-          <nav className='sticky top-0 shadow-sm z-10 bg-white basis-16 '><Header /></nav>
+          <nav className='sticky top-0 shadow-sm z-50 bg-white basis-16 '><Header /></nav>
           <nav className='w-full h-full bg-white  z-10 relative   mx-auto overflow-x-hidden  grow ' id='outlet'>
             <Routes>
               <Route exact={true} path='/dashboard' element={<Dashboard />} />

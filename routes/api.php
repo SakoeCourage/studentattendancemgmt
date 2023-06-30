@@ -19,8 +19,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+Route::group(['middleware' => 'guest'], function () {
+    Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'authenticate']);
+    Route::post('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'index']);
+});
 
 
+Route::post('/logout', [\App\Http\Controllers\Auth\LogoutController::class, 'logout']);
 Route::post('/student/new', [App\Http\Controllers\StudentController::class, 'create']);
 Route::get('/students-with-template', [App\Http\Controllers\StudentController::class, 'studentswithtemplate']);
 

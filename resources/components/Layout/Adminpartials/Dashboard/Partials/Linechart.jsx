@@ -93,10 +93,6 @@ function LineChart({ dashboardData }) {
 
 
 
-
-
-
-
     return (
         <div className=' px-10 shadow-md p-10 border h-max min-w-[70%] card rounded-md border-gray-400/40'>
             <div className="linechart px-10">
