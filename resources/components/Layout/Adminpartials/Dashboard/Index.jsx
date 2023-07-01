@@ -13,7 +13,6 @@ function Index() {
     setIsLoading(true)
     Api.get('/dashboard/data')
       .then(res => {
-        console.log(res.data)
         setIsLoading(false)
         setData(res.data)
       })

@@ -19,13 +19,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+Route::middleware('auth:sanctum')->post('/logout', [\App\Http\Controllers\Auth\LogoutController::class, 'logout']);
+
 Route::group(['middleware' => 'guest'], function () {
     Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'authenticate']);
     Route::post('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'index']);
 });
 
 
-Route::post('/logout', [\App\Http\Controllers\Auth\LogoutController::class, 'logout']);
 Route::post('/student/new', [App\Http\Controllers\StudentController::class, 'create']);
 Route::get('/students-with-template', [App\Http\Controllers\StudentController::class, 'studentswithtemplate']);
 
@@ -59,3 +60,10 @@ Route::group(['prefix'=>'lecturer'],function(){
     Route::get('/all', [App\Http\Controllers\LecturerController::class, 'index']);
   
 });
+
+Route::group(['prefix'=>'report'],function(){
+    Route::post('/new-student', [App\Http\Controllers\ReportController::class, 'generateSudentAttendanceReport']);
+    Route::post('/all', [App\Http\Controllers\ReportController::class, 'index']);
+  
+});
+

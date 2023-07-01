@@ -43,8 +43,6 @@ class DashboardController extends Controller
             ->selectRaw('DATE_FORMAT(created_at,"%a") as day,presence')
             ->get();
 
-
-
         $newattendance = $days->mapWithKeys(function ($day, $index) use ($attendance) {
             return [
                 $day => $attendance->where('day', $day)->count()

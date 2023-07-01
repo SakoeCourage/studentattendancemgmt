@@ -16,14 +16,8 @@ function App() {
     getUser()
   }, [])
 
-  useEffect(() => {
-    console.log(checkingforuser)
-  }, [checkingforuser])
 
 
-  useEffect(() => {
-    console.log(user)
-  }, [user])
   return (
     <div className=' bg-white w-screen h-screen'>
       {checkingforuser === 'fullfiled' ?

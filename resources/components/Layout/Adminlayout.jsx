@@ -9,6 +9,7 @@ import Studentspage from './Adminpartials/Students'
 import Programpage from './Adminpartials/Programs'
 import Coursepage from './Adminpartials/Courses'
 import Lecturerpage from './Adminpartials/Lecturers'
+import Reportpage from './Adminpartials/Report'
 
 export function Adminlayout() {
   const [showSidebar, setShowsidebar] = useState(true)
@@ -29,18 +30,19 @@ export function Adminlayout() {
   return (
     <div className="w-screen h-screen flex overflow-hidden bg-gray-100">
       <SidebarContext.Provider value={{ setShowsidebar }}>
-        <span ref={sidebarElement} className='hidden transition-[width] duration-300 w-max md:block  ' >
+        <span ref={sidebarElement} className='hidden transition-[width] duration-300 w-max lg:block  ' >
           <Sidebar />
         </span>
         <span className=' grow h-full overflow-x-hidden flex flex-col' id='documentPage'>
-          <nav className='sticky top-0 shadow-sm z-50 bg-white basis-16 '><Header /></nav>
-          <nav className='w-full h-full bg-white  z-10 relative   mx-auto overflow-x-hidden  grow ' id='outlet'>
+          <nav className='sticky top-0 shadow-sm  bg-white basis-16 '><Header /></nav>
+          <nav className='w-full h-full bg-white   relative   mx-auto overflow-x-hidden  grow ' id='outlet'>
             <Routes>
               <Route exact={true} path='/dashboard' element={<Dashboard />} />
               <Route  path='/student/*' element={<Studentspage />} />
               <Route  path='/programs/*' element={<Programpage />} />
               <Route  path='/courses/*' element={<Coursepage />} />
               <Route  path='/lecturer/*' element={<Lecturerpage />} />
+              <Route  path='/report/*' element={<Reportpage />} />
             </Routes >
           </nav>
         </span>

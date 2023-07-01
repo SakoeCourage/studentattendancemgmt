@@ -26,7 +26,7 @@ function Analyticalview({dashboardData}) {
             </nav>
             <div className=' grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5' >
                 <Analyticcard IconClass={' text-orange-400'} count={formatnumber(dashboardData?.analyticalData?.studentCount) ?? ''} title='Students' inscription={'All Registered Students'} className=' bg-orange-100/70 ' />
-                <Analyticcard IconClass={' text-green-400'} count={formatnumber(dashboardData?.analyticalData?.lecturesCount) ?? ''} inscription={'All Registered Lecturers'} className=' bg-green-100/70 ' />
+                <Analyticcard IconClass={' text-green-400'} count={formatnumber(dashboardData?.analyticalData?.lecturesCount) ?? ''}  title='Lectueres' inscription={'All Registered Lecturers'} className=' bg-green-100/70 ' />
                 <Analyticcard IconClass={' text-blue-400'} count={formatnumber(dashboardData?.analyticalData?.programsCount) ?? ''} title='Programs' inscription={'All Programs offered'} className=' bg-blue-100/70 ' />
                 <Analyticcard IconClass={' text-zinc-400'} count={formatnumber(dashboardData?.analyticalData?.courseCount) ?? ''} title='Course'inscription={'All Registered Courses'} className=' bg-zinc-100/70 ' />
             </div>

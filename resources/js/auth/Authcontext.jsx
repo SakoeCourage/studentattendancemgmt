@@ -45,10 +45,17 @@ export const AuthProvider = ({ children }) => {
     };
 
     const logout = () => {
+        setCheckingforUser('processing')
         User.logout()
             .then(res => {
                 setUser(null);
+                Cookies.remove('BearerToken')
                 navigate("/login", { replace: true });
+                setCheckingforUser('fullfiled')
+            })
+            .catch(err=>{
+                setCheckingforUser('fullfiled')
+                console.log(err.response)
             })
 
     };

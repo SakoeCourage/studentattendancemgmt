@@ -28,4 +28,16 @@ class Student extends Model
     {
         return $this->belongsTo(Programs::class, 'programs_id', 'id');
     }
+    public function attendance()
+    {
+        return $this->hasMany(Studentattendance::class, 'student_id', 'id');
+    }
+    public function presencecount()
+    {
+        return $this->hasMany(Studentattendance::class, 'student_id', 'id')->where('presence',1)->get()->count();
+    }
+    public function absencecount()
+    {
+        return $this->hasMany(Studentattendance::class, 'student_id', 'id')->where('presence',0)->get()->count();
+    }
 }

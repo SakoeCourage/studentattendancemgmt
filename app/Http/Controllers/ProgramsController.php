@@ -50,8 +50,7 @@ class ProgramsController extends Controller
     {
         $request->validate([
             'program_name' => ['required', 'string','unique:programs,program_name'],
-            'program_courses' => ['required', 'array', 'min:1'],
-            'program_courses.*.name' => ['required', 'distinct'],
+            'program_courses' => ['required', 'array', 'min:1']
         ]);
 
 
@@ -63,7 +62,7 @@ class ProgramsController extends Controller
             foreach ( $request->program_courses as $key => $course) {
                 program_has_courses::create([
                     'program_id' => $newprogram->id,
-                    'course_id' => $this->getIDFromCourseName($course['name'])
+                    'course_id' => $this->getIDFromCourseName($course)
                 ]);
             }
         });

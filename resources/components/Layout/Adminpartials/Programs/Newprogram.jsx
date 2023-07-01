@@ -6,7 +6,7 @@ import Api from '@/js/api/Api'
 import Button from '@/components/inputs/Button'
 import Loadingwheel from '@/components/Loaders/Loadingwheel'
 import {  useSnackbar } from 'notistack'
-
+import Programselection from './partials/Programselection'
 
 function Newprogram() {
   const [allCoursesList, setAllCoursesList] = useState([])
@@ -30,6 +30,10 @@ function Newprogram() {
   }, [])
 
 
+  const resetData =()=>{
+    setProgramCourse([])
+    setProgramName('')
+  }
   const handleOnSubmit = () => {
     setIsLoading(true)
     Api.post('/programs/new', {
@@ -40,6 +44,7 @@ function Newprogram() {
         console.log(res)
         setIsLoading(false)
         enqueueSnackbar('New Program Added',{variant:'success'})
+        resetData();
       })
       .catch(err => {
         console.log(err)
@@ -50,9 +55,12 @@ function Newprogram() {
       })
 
   }
+useEffect(() => {
+    console.log(programCourses)
+}, [programCourses])
 
   return (
-    <div>
+    <div className=' pb-10'>
       {isLoading && <Loadingwheel />}
       <nav className=' flex items-center gap-5 max-w-5xl mx-auto text-2xl text-gray-500'>
         <Icon icon="bi:plus-circle" />
@@ -67,10 +75,16 @@ function Newprogram() {
             Include courses that students who are eligible to offer these program can take
           </p>
         </nav>
-        <FormInputMultiSelect error={errors?.program_courses} helperText={errors?.program_courses} label="Eligible Courses" options={Boolean(allCoursesList.length > 0) ? [...allCoursesList.map(course => { return ({ name: course?.course_name }) })] : []} selectedData={(v) => setProgramCourse(v)} />
+        <Programselection
+          selectedCourses={programCourses}
+          setSelectedCourses={setProgramCourse}
+          availableCourses={allCoursesList}
+          selectedData={(v) => setProgramCourse(v)}
+        />
+        <span className=' text-red-600 text-xs pl-4'>{errors?.program_courses}</span>
       </nav>
       <nav className="flex flex-col md:flex-row gap-5 w-full max-w-4xl mx-auto mt-10">
-        <Button className="flex-grow" neutral text="Cancel" />
+        <Button onClick={resetData} className="flex-grow" neutral text="Cancel" />
         <Button className="flex-grow" text="Save" onClick={handleOnSubmit} />
       </nav>
     </div>

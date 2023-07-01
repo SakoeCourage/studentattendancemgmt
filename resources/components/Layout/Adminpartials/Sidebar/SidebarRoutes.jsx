@@ -63,7 +63,7 @@ let sidebarRoutes =
         {
             title: "Generate Report",
             icon: <Icon icon="carbon:report" />,
-            link: '/admin/dashboard',
+            link: '/admin/report',
         },
     ];
 

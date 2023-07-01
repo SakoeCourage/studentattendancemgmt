@@ -5,11 +5,11 @@ import { Icon } from '@iconify/react';
 import { useAuth } from '@/js/auth/Authcontext';
 export default function Header() {
 
-    const {logout} = useAuth()
+    const { logout } = useAuth()
     const [isDropped, setisDropped] = useState(false)
     const { setShowsidebar } = useContext(SidebarContext)
     return (
-        <div className='relative isolate ' id='header'>
+        <div className='relative  ' id='header'>
             <div className='flex justify-between  px-5 py-2'>
                 <button className='text-primaryindigo bg-transparent' onClick={() => { setShowsidebar((value) => !value) }}>
                     <Icon icon="flat-color-icons:menu" />
@@ -21,14 +21,15 @@ export default function Header() {
                     <nav className='h-8 w-8 aspect-square object-cover rounded-full order-1 font-bold bg-blue-400 grid place-items-center text-blue-50'>
                         A
                     </nav>
-                    <Icon icon="ic:round-arrow-drop-down" onClick={() => setisDropped(!isDropped)} className='order-3 cursor-pointer bg-gray-500 text-white h-2 w-2 p-1 rounded-full' />
+                    <button onClick={()=>logout()} className='flex gap-2 items-center order-3 cursor-pointer bg-info-500 p-2 text-white  rounded-full'>
+                        <Icon icon="basil:logout-solid" /><span className=' text-sm'>logout </span></button>
                 </nav>
             </div>
-            {isDropped && <span className='absolute right-14 bg-white py-4 shadow-md px-4 z-50  ' >
+            {/* {isDropped && <span className='fixed right-14 bg-white py-4 shadow-md px-4 z-50  ' >
                 <ul onClick={()=>logout()} className=' cursor-pointer z-50'>
-                    <li className='flex gap-2 items-center'><Icon icon="basil:logout-solid" /><span>logout </span></li>
+                    
                 </ul>
-            </span>}
+            </span>} */}
         </div>
     )
 }

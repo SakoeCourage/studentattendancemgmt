@@ -1,18 +1,22 @@
 import axios from "axios";
 import Cookies from 'js-cookie'
+import getCookie from "./getCookie";
 
 
 
 const baseURL = import.meta.env.VITE_APP_BASE_URL;
 
-
+const requesttoken = await getCookie()
+const token = await requesttoken
 const Bearertoken = Cookies.get('BearerToken')
 const Api = axios.create({
     baseURL: `${baseURL}/api`,
     withCredentials: true,
 })
 
+
 Api.defaults.headers.common['Authorization'] = `Bearer ${Bearertoken}`;
+Api.defaults.headers.common['X-XSRF-TOKEN'] = token;
 
 Api.interceptors.response.use(function (response) {
     return response
